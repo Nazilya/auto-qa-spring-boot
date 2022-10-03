@@ -1,0 +1,1 @@
+# auto-qa-spring-boot
