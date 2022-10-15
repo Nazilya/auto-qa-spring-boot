@@ -1,4 +1,4 @@
-package ru.geekbrains.auto.qa.autoqa.lesson2.controller.homework2.books.dto;
+package ru.geekbrains.auto.qa.autoqa.lesson2.controller.homework2.book.dto;
 import lombok.*;
 @Data
 @AllArgsConstructor

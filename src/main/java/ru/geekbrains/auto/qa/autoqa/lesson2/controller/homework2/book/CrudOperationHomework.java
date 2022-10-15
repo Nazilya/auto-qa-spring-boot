@@ -1,7 +1,7 @@
-package ru.geekbrains.auto.qa.autoqa.lesson2.controller.homework2.books;
+package ru.geekbrains.auto.qa.autoqa.lesson2.controller.homework2.book;
 
 import org.springframework.web.bind.annotation.*;
-import ru.geekbrains.auto.qa.autoqa.lesson2.controller.homework2.books.dto.Book;
+import ru.geekbrains.auto.qa.autoqa.lesson2.controller.homework2.book.dto.Book;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
