@@ -112,14 +112,12 @@ public class UserIntegrationTest {
         userEntity.setAge(50);
         userRepository.saveAndFlush(userEntity);
 
+        //step 1 send put request
         User user = new User();
         user.setFirstName("First Name Update");
         user.setSecondName("Second Name Update");
         user.setAge(55);
-        user.setId(userRepository.findAll().stream()
-                .findFirst()
-                .orElseThrow()
-                .getId());
+        user.setId(userEntity.getId());
 
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(getRootUrl() + "/user-rest/"))
@@ -133,13 +131,17 @@ public class UserIntegrationTest {
         //intermediate assert after first step
         Assertions.assertThat(response.statusCode()).isEqualTo(SC_OK);
 
-        //assert
-        UserEntity userAfterUpdate = userRepository.findById(user.getId()).orElseThrow();
+        //step 2 - get updated user entity
+        UserEntity updatedUserEntity = userRepository.findById(userEntity.getId())
+                .orElseThrow();
+
+        //assert updated fields
         SoftAssertions.assertSoftly(s -> {
-            s.assertThat(user.getFirstName()).isEqualTo(userAfterUpdate.getFirstName());
-            s.assertThat(user.getSecondName()).isEqualTo(userAfterUpdate.getSecondName());
-            s.assertThat(user.getAge()).isEqualTo(userAfterUpdate.getAge());
+            s.assertThat(updatedUserEntity.getFirstName()).isEqualTo(user.getFirstName());
+            s.assertThat(updatedUserEntity.getSecondName()).isEqualTo(user.getSecondName());
+            s.assertThat(updatedUserEntity.getAge()).isEqualTo(user.getAge());
         });
+
     }
 
 
@@ -150,10 +152,11 @@ public class UserIntegrationTest {
         userEntity.setFirstName("First Name");
         userEntity.setSecondName("Second Name");
         userEntity.setAge(50);
-        UserEntity entity = userRepository.saveAndFlush(userEntity);
+        userRepository.saveAndFlush(userEntity);
 
+        //step 1 send delete request
         HttpRequest httpRequest = HttpRequest.newBuilder()
-                .uri(URI.create(getRootUrl() + "/user-rest/" + entity.getId()))
+                .uri(URI.create(getRootUrl() + "/user-rest/" + userEntity.getId()))
                 .header(HttpHeaders.CONTENT_TYPE, "application/json")
                 .DELETE()
                 .build();
@@ -162,9 +165,7 @@ public class UserIntegrationTest {
         HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
         //assert
         Assertions.assertThat(response.statusCode()).isEqualTo(SC_OK);
-        //assert
-        SoftAssertions.assertSoftly(s -> {
-            s.assertThat(userRepository.findById(userEntity.getId())).isEmpty();
-        });
+        //assert that repository is empty
+        Assertions.assertThat(userRepository.findAll()).isEmpty();
     }
 }

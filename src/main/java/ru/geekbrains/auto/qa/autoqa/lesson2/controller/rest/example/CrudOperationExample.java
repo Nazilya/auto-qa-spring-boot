@@ -1,6 +1,5 @@
 package ru.geekbrains.auto.qa.autoqa.lesson2.controller.rest.example;
 
-import org.jetbrains.annotations.NotNull;
 import  org.springframework.web.bind.annotation.*;
 import ru.geekbrains.auto.qa.autoqa.lesson2.controller.rest.example.dto.User;
 import javax.annotation.PostConstruct;
@@ -38,7 +37,7 @@ public class CrudOperationExample {
     public void change(@PathVariable int id, @RequestBody User userChanging) {
         User user = data.get(id);
         user.setAge(userChanging.getAge());
-        user.setFirstname(userChanging.getFirstname());
+        user.setFirstName(userChanging.getFirstName());
         user.setSecondName(userChanging.getSecondName());
         data.put(id, user);
     }
