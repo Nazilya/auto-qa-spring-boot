@@ -10,6 +10,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.geekbrains.auto.qa.autoqa.lesson7.config.GeekBrainsTestConfig;
 import ru.geekbrains.auto.qa.autoqa.lesson7.page.GeekBrainsMainPage;
+import ru.geekbrains.auto.qa.autoqa.lesson7.page.JavaMobileAppPage;
 import ru.geekbrains.auto.qa.autoqa.lesson7.page.JavaProfessionPage;
 import ru.geekbrains.auto.qa.autoqa.lesson7.page.JavaQaAutomationProfessionPage;
 
@@ -27,6 +28,9 @@ public class GeekBrainsSearchInfoTest {
 
     @Autowired
     private JavaProfessionPage javaProfessionPage;
+
+    @Autowired
+    private JavaMobileAppPage javaMobileAppPage;
 
     @Test
     public void getJavaQaAutomationProfessionTest() {
@@ -49,6 +53,17 @@ public class GeekBrainsSearchInfoTest {
 
         Assertions.assertThat(javaProfessionPage.getFormOffer().getText())
                 .containsIgnoringCase("Пройдите обучение на инженера-программиста на Java.");
+
+    }
+    @Test
+    public void getJavaMobileAppTest() {
+
+        mainPage.getMainPage()
+                .search("Java")
+                .getProfession("Мобильные приложения на Java");
+
+        Assertions.assertThat(javaMobileAppPage.getFormOffer().getText())
+                .containsIgnoringCase("Создай с нуля интересную викторину и разработай своё приложение для android-смартфона");
 
     }
 
