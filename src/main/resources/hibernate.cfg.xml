@@ -26,7 +26,5 @@
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
         <mapping class="ru.geekbrains.auto.qa.autoqa.lesson4.entity.UserEntity" />
         <mapping class="ru.geekbrains.auto.qa.autoqa.lesson4.entity.AddressEntity" />
-<!--        <mapping class="ru.geekbrains.auto.qa.autoqa.lesson4.homework4.book.entity.BookEntity" />-->
-<!--        <mapping class="ru.geekbrains.auto.qa.autoqa.lesson4.homework4.book.entity.ShopEntity" />-->
     </session-factory>
 </hibernate-configuration>

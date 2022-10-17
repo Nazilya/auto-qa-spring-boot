@@ -6,8 +6,6 @@
     <persistence-unit name="qa-auto-test" transaction-type="RESOURCE_LOCAL">
         <class>ru.geekbrains.auto.qa.autoqa.lesson4.entity.UserEntity</class>
         <class>ru.geekbrains.auto.qa.autoqa.lesson4.entity.AddressEntity</class>
-<!--        <class>ru.geekbrains.auto.qa.autoqa.lesson4.homework4.book.entity.BookEntity</class>-->
-<!--        <class>ru.geekbrains.auto.qa.autoqa.lesson4.homework4.book.entity.ShopEntity</class>-->
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
